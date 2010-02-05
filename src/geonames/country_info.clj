@@ -4,36 +4,44 @@
 
 (def *url* "http://download.geonames.org/export/dump/countryInfo.txt")
 
-(defstruct country :continent :name :iso-3166 :capital :area :population :top-level-domain :currency :phone)
+(defstruct country
+  :area :capital :continent-code :currency-code :currency-name
+  :iso-3166-alpha-2 :iso-3166-alpha-3 :iso-3166-numeric :name
+  :phone :population :top-level-domain)
 
 (defn- parse-integer [string]
   (try (Integer/parseInt string)
        (catch NumberFormatException exception nil)))
 
 (defn- valid-country? [country]
-  (and country (:name country) (:iso-3166 country)))
+  (and country (:name country) (:iso-3166-alpha-2 country)))
 
 (defn comment? [line]
   (not (nil? (re-find #"^\s*#.*$" line))))
 
 (defn parse-country [line]  
   (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips name
-         capital area population continent top-level-domain
+         capital area population continent-code top-level-domain
          currency-code currency-name phone _ _ _ _ _ _ _ _ _ _ _]
         (split line #"\t")]    
-    (and name iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric continent
+    (and name iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric continent-code
          (struct-map country
-           :iso-3166 {:alpha-2 (trim iso-3166-alpha-2) :alpha-3 (trim iso-3166-alpha-3) :numeric (parse-integer iso-3166-numeric) }
-           :name name
-           :capital (trim capital)
            :area (parse-integer area)
+           :capital (trim capital)
+           :continent-code (trim continent-code) 
+           :currency-code (trim currency-code)
+           :currency-name (trim currency-name)
+           :iso-3166-alpha-2 (trim iso-3166-alpha-2)
+           :iso-3166-alpha-3 (trim iso-3166-alpha-3)
+           :iso-3166-numeric (parse-integer iso-3166-numeric)           
+           :name name
+           :phone phone
            :population (parse-integer population)
-           :continent { :code continent }
-           :top-level-domain  (trim top-level-domain)
-           :currency { :code (trim currency-code) :name (trim currency-name) }
-           :phone phone))))
+           :top-level-domain (trim top-level-domain)))))
 
 (defn parse-countries
-  ([] (parse-countries *url*))
-  ([source] (filter valid-country? (map parse-country (read-lines source)))))
+  ([]
+     (parse-countries *url*))
+  ([source]
+     (filter valid-country? (map parse-country (read-lines source)))))
 

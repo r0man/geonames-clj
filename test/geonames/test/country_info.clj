@@ -1,26 +1,27 @@
 (ns geonames.test.country-info
   (:use clojure.test geonames.country-info))
 
-(def *country-line* "FO\tFRO\t234\tFO\tFaroe Islands\tTórshavn\t1399\t48228\tEU\t.fo\tDKK\tKrone\t298\tFO-###\t^(?:FO)*(\\d{3})$\tfo,da-FO\t2622320")
+(def *line* "FO\tFRO\t234\tFO\tFaroe Islands\tTórshavn\t1399\t48228\tEU\t.fo\tDKK\tKrone\t298\tFO-###\t^(?:FO)*(\\d{3})$\tfo,da-FO\t2622320")
 
 (deftest test-comment?
   (is (comment? "# comment"))
-  (is (not (comment? *country-line*))))
+  (is (not (comment? *line*))))
 
 (deftest test-parse-country
-  (let [country (parse-country *country-line*)]
-    (is (= (:alpha-2 (:iso-3166 country)) "FO"))
-    (is (= (:alpha-3 (:iso-3166 country)) "FRO"))
-    (is (= (:numeric (:iso-3166 country)) 234))
-    (is (= (:name country) "Faroe Islands"))
-    (is (= (:capital country) "Tórshavn"))
-    (is (= (:area country) 1399))
-    (is (= (:population country) 48228))
-    (is (= (:code (:continent country) "EU")))
-    (is (= (:top-level-domain country) ".fo"))
-    (is (= (:code (:currency country) "DKK")))
-    (is (= (:name (:currency country) "Krone")))
-    (is (= (:phone country) "298"))))
+  (let [country (parse-country *line*)]
+    (are [attribute expected] (= (country attribute) expected)
+    :iso-3166-alpha-2 "FO"
+    :iso-3166-alpha-3 "FRO"
+    :iso-3166-numeric 234
+    :name "Faroe Islands"
+    :capital "Tórshavn"
+    :area 1399
+    :population 48228
+    :continent-code "EU"
+    :top-level-domain ".fo"
+    :currency-code "DKK"
+    :currency-name "Krone"
+    :phone "298")))
 
 (deftest test-parse-countries
   (let [countries (parse-countries)]
