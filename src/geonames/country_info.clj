@@ -16,6 +16,9 @@
   (try (Integer/parseInt string)
        (catch NumberFormatException exception nil)))
 
+(defn- parse-list [string]
+  (if string (map trim (split string #","))))
+
 (defn- valid-country? [country]
   (and country (:name country) (:iso-3166-alpha-2 country)))
 
@@ -37,9 +40,9 @@
            :iso-3166-alpha-2 (trim iso-3166-alpha-2)
            :iso-3166-alpha-3 (trim iso-3166-alpha-3)
            :iso-3166-numeric (parse-integer iso-3166-numeric)
-           :languages (split (trim languages) #",")
+           :languages (parse-list languages)
            :name (trim name)
-           :neighbours (if neighbours (split (trim neighbours) #",")) 
+           :neighbours (parse-list neighbours)
            :phone-prefix (trim phone-prefix)
            :population (parse-integer population)
            :post-code-format (trim post-code-format)
