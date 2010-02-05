@@ -5,9 +5,12 @@
 (def *url* "http://download.geonames.org/export/dump/countryInfo.txt")
 
 (defstruct country
-  :area :capital :continent-code :currency-code :currency-name :fips-code
-  :iso-3166-alpha-2 :iso-3166-alpha-3 :iso-3166-numeric :languages :name :phone-prefix
-  :post-code-format :post-code-regexp :population :top-level-domain)
+  :area :capital :continent-code :currency-code :currency-name :fips-code :geoname-id
+  :iso-3166-alpha-2 :iso-3166-alpha-3 :iso-3166-numeric :languages :name :neighbours 
+  :phone-prefix :population :post-code-format :post-code-regexp :top-level-domain)
+
+(defn- comment? [line]
+  (not (nil? (re-find #"^\s*#.*$" line))))
 
 (defn- parse-integer [string]
   (try (Integer/parseInt string)
@@ -15,9 +18,6 @@
 
 (defn- valid-country? [country]
   (and country (:name country) (:iso-3166-alpha-2 country)))
-
-(defn comment? [line]
-  (not (nil? (re-find #"^\s*#.*$" line))))
 
 (defn parse-country [line]  
   (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips-code
@@ -39,15 +39,13 @@
            :iso-3166-numeric (parse-integer iso-3166-numeric)
            :languages (split (trim languages) #",")
            :name (trim name)
+           :neighbours (if neighbours (split (trim neighbours) #",")) 
            :phone-prefix (trim phone-prefix)
+           :population (parse-integer population)
            :post-code-format (trim post-code-format)
            :post-code-regexp (trim post-code-regexp)
-           :population (parse-integer population)
            :top-level-domain (trim top-level-domain)))))
 
 (defn parse-countries
-  ([]
-     (parse-countries *url*))
-  ([source]
-     (filter valid-country? (map parse-country (read-lines source)))))
-
+  ([] (parse-countries *url*))
+  ([source] (filter valid-country? (map parse-country (read-lines source)))))
