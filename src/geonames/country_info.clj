@@ -6,8 +6,8 @@
 
 (defstruct country
   :area :capital :continent-code :currency-code :currency-name :fips-code
-  :iso-3166-alpha-2 :iso-3166-alpha-3 :iso-3166-numeric :name
-  :phone-prefix :population :top-level-domain)
+  :iso-3166-alpha-2 :iso-3166-alpha-3 :iso-3166-numeric :languages :name :phone-prefix
+  :post-code-format :post-code-regexp :population :top-level-domain)
 
 (defn- parse-integer [string]
   (try (Integer/parseInt string)
@@ -20,9 +20,10 @@
   (not (nil? (re-find #"^\s*#.*$" line))))
 
 (defn parse-country [line]  
-  (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips-code name
-         capital area population continent-code top-level-domain
-         currency-code currency-name phone-prefix _ _ _ _ _ _ _ _ _ _ _]
+  (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips-code
+         name capital area population continent-code top-level-domain
+         currency-code currency-name phone-prefix post-code-format
+         post-code-regexp languages geoname-id neighbours  _ _ _ _ _ _ _]
         (split line #"\t")]    
     (and name iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric continent-code
          (struct-map country
@@ -32,11 +33,15 @@
            :currency-code (trim currency-code)
            :currency-name (trim currency-name)
            :fips-code (trim fips-code)
+           :geoname-id (parse-integer geoname-id)
            :iso-3166-alpha-2 (trim iso-3166-alpha-2)
            :iso-3166-alpha-3 (trim iso-3166-alpha-3)
-           :iso-3166-numeric (parse-integer iso-3166-numeric)           
+           :iso-3166-numeric (parse-integer iso-3166-numeric)
+           :languages (split (trim languages) #",")
            :name (trim name)
            :phone-prefix (trim phone-prefix)
+           :post-code-format (trim post-code-format)
+           :post-code-regexp (trim post-code-regexp)
            :population (parse-integer population)
            :top-level-domain (trim top-level-domain)))))
 

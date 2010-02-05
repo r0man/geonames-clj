@@ -16,11 +16,15 @@
     :currency-code "DKK"
     :currency-name "Krone"
     :fips-code "FO"
+    :geoname-id 2622320
     :iso-3166-alpha-2 "FO"
     :iso-3166-alpha-3 "FRO"
     :iso-3166-numeric 234
+    :languages ["fo" "da-FO"]
     :name "Faroe Islands"
     :phone-prefix "298"
+    :post-code-format "FO-###"
+    :post-code-regexp "^(?:FO)*(\\d{3})$"
     :population 48228
     :top-level-domain ".fo"
     )))
