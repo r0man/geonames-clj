@@ -5,7 +5,7 @@
 (def *url* "http://download.geonames.org/export/dump/countryInfo.txt")
 
 (defstruct country
-  :area :capital :continent-code :currency-code :currency-name
+  :area :capital :continent-code :currency-code :currency-name :fips-code
   :iso-3166-alpha-2 :iso-3166-alpha-3 :iso-3166-numeric :name
   :phone :population :top-level-domain)
 
@@ -20,7 +20,7 @@
   (not (nil? (re-find #"^\s*#.*$" line))))
 
 (defn parse-country [line]  
-  (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips name
+  (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips-code name
          capital area population continent-code top-level-domain
          currency-code currency-name phone _ _ _ _ _ _ _ _ _ _ _]
         (split line #"\t")]    
@@ -31,6 +31,7 @@
            :continent-code (trim continent-code) 
            :currency-code (trim currency-code)
            :currency-name (trim currency-name)
+           :fips-code (trim fips-code)
            :iso-3166-alpha-2 (trim iso-3166-alpha-2)
            :iso-3166-alpha-3 (trim iso-3166-alpha-3)
            :iso-3166-numeric (parse-integer iso-3166-numeric)           
