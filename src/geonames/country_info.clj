@@ -23,7 +23,7 @@
   (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips-code
          name capital area population continent-code top-level-domain
          currency-code currency-name phone-prefix post-code-format
-         post-code-regexp languages geoname-id neighbours  _ _ _ _ _ _ _]
+         post-code-regexp languages geoname-id neighbours]
         (split line #"\t")]    
     (and name iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric continent-code
          (struct-map country
