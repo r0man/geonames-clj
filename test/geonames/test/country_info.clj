@@ -20,7 +20,7 @@
     :iso-3166-alpha-3 "FRO"
     :iso-3166-numeric 234
     :name "Faroe Islands"
-    :phone "298"
+    :phone-prefix "298"
     :population 48228
     :top-level-domain ".fo"
     )))
