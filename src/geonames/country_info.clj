@@ -34,8 +34,8 @@
            :iso-3166-alpha-2 (trim iso-3166-alpha-2)
            :iso-3166-alpha-3 (trim iso-3166-alpha-3)
            :iso-3166-numeric (parse-integer iso-3166-numeric)           
-           :name name
-           :phone phone
+           :name (trim name)
+           :phone (trim phone)
            :population (parse-integer population)
            :top-level-domain (trim top-level-domain)))))
 
