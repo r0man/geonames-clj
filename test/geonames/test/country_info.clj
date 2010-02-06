@@ -45,7 +45,7 @@
          :post-code-regexp "^(\\d{5})$"
          :top-level-domain ".de")))
 
-(deftest test-parse-countries
-  (let [countries (parse-countries)]
+(deftest test-parse-country-info
+  (let [countries (parse-country-info)]
     (is (= (count countries) 248))))
 

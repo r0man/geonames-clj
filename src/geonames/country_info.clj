@@ -49,6 +49,6 @@
            :post-code-regexp (trim post-code-regexp)
            :top-level-domain (trim top-level-domain)))))
 
-(defn parse-countries
-  ([] (parse-countries *url*))
+(defn parse-country-info
+  ([] (parse-country-info *url*))
   ([source] (filter valid-country? (map parse-country (read-lines source)))))
