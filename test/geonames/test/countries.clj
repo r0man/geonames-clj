@@ -1,5 +1,5 @@
-(ns geonames.test.country-info
-  (:use clojure.test geonames.country-info))
+(ns geonames.test.countries
+  (:use clojure.test geonames.countries))
 
 (deftest test-parse-faroe-islands
   (let [country (parse-country "FO\tFRO\t234\tFO\tFaroe Islands\tTórshavn\t1399\t48228\tEU\t.fo\tDKK\tKrone\t298\tFO-###\t^(?:FO)*(\\d{3})$\tfo,da-FO\t2622320")]
@@ -10,7 +10,7 @@
          :currency-code "DKK"
          :currency-name "Krone"
          :fips-code "FO"
-         :geoname-id 2622320
+         :geonames-id 2622320
          :iso-3166-alpha-2 "FO"
          :iso-3166-alpha-3 "FRO"
          :iso-3166-numeric 234
@@ -32,7 +32,7 @@
          :currency-code "EUR"
          :currency-name "Euro"
          :fips-code "GM"
-         :geoname-id 2921044
+         :geonames-id 2921044
          :iso-3166-alpha-2 "DE"
          :iso-3166-alpha-3 "DEU"
          :iso-3166-numeric 276
@@ -45,7 +45,7 @@
          :post-code-regexp "^(\\d{5})$"
          :top-level-domain ".de")))
 
-(deftest test-parse-country-info
-  (let [countries (parse-country-info)]
+(deftest test-parse-countries
+  (let [countries (parse-countries)]
     (is (= (count countries) 248))))
 

@@ -1,11 +1,11 @@
-(ns geonames.country-info
+(ns geonames.countries
   (:use [clojure.contrib.duck-streams :only (read-lines)]
         [clojure.contrib.str-utils2 :only (split trim)]))
 
 (def *url* "http://download.geonames.org/export/dump/countryInfo.txt")
 
 (defstruct country
-  :area :capital :continent-code :currency-code :currency-name :fips-code :geoname-id
+  :area :capital :continent-code :currency-code :currency-name :fips-code :geonames-id
   :iso-3166-alpha-2 :iso-3166-alpha-3 :iso-3166-numeric :languages :name :neighbours 
   :phone-prefix :population :post-code-format :post-code-regexp :top-level-domain)
 
@@ -26,7 +26,7 @@
   (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips-code
          name capital area population continent-code top-level-domain
          currency-code currency-name phone-prefix post-code-format
-         post-code-regexp languages geoname-id neighbours]
+         post-code-regexp languages geonames-id neighbours]
         (split line #"\t")]    
     (and name iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric continent-code
          (struct-map country
@@ -36,7 +36,7 @@
            :currency-code (trim currency-code)
            :currency-name (trim currency-name)
            :fips-code (trim fips-code)
-           :geoname-id (parse-integer geoname-id)
+           :geonames-id (parse-integer geonames-id)
            :iso-3166-alpha-2 (trim iso-3166-alpha-2)
            :iso-3166-alpha-3 (trim iso-3166-alpha-3)
            :iso-3166-numeric (parse-integer iso-3166-numeric)
@@ -49,6 +49,6 @@
            :post-code-regexp (trim post-code-regexp)
            :top-level-domain (trim top-level-domain)))))
 
-(defn parse-country-info
-  ([] (parse-country-info *url*))
+(defn parse-countries
+  ([] (parse-countries *url*))
   ([source] (filter valid-country? (map parse-country (read-lines source)))))
