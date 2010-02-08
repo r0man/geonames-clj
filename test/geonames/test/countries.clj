@@ -2,10 +2,14 @@
   (:use clojure.test geonames.countries))
 
 (deftest test-parse-country
-  (is (nil? (parse-country "invalid")))
-  (is (nil? (parse-country "invalid\tinvalid\tinvalid\tinvalid"))))
+  (are [line] (is nil? (parse-country line))
+       "# GeoNames.org Country Information"
+       "# ================================"
+       "# The column 'languages' lists the languages spoken in a country ordered by the number of speakers. The language code is a 'locale'"
+       "#ISO\tISO3\tISO-Numeric\tfips\tCountry\tCapital\tArea(in sq km)\tPopulation\tContinent\ttld\tCurrencyCode\tCurrencyName\tPhone\tPostal Code Format\tPostal Code Regex\tLanguages\tgeonameid\tneighbours\tEquivalentFipsCode"
+       "invalid\tinvalid\tinvalid\tinvalid\tinvalid\tinvalid"))
 
-(deftest test-parse-faroe-islands
+(deftest test-parse-country-with-faroe-islands
   (let [country (parse-country "FO\tFRO\t234\tFO\tFaroe Islands\tTórshavn\t1399\t48228\tEU\t.fo\tDKK\tKrone\t298\tFO-###\t^(?:FO)*(\\d{3})$\tfo,da-FO\t2622320")]
     (are [attribute expected] (= (country attribute) expected)
          :area 1399
@@ -27,7 +31,7 @@
          :post-code-regexp "^(?:FO)*(\\d{3})$"
          :top-level-domain ".fo")))
 
-(deftest test-parse-germany
+(deftest test-parse-country-with-germany
   (let [country (parse-country "DE\tDEU\t276\tGM\tGermany\tBerlin\t357021\t82369000\tEU\t.de\tEUR\tEuro\t49\t#####\t^(\\d{5})$\tde\t2921044\tCH,PL,NL,DK,BE,CZ,LU,FR,AT")]
     (are [attribute expected] (= (country attribute) expected)
          :area 357021
@@ -51,5 +55,4 @@
 
 (deftest test-parse-countries
   (let [countries (parse-countries)]
-    (is (= (count countries) 248))))
-
+    (is (= (count countries) 247))))
