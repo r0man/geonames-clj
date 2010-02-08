@@ -1,2 +1,4 @@
-classes
-lib
+/classes
+/lib
+/pom.xml
+/geonames.jar
