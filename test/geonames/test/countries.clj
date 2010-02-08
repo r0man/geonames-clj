@@ -1,6 +1,10 @@
 (ns geonames.test.countries
   (:use clojure.test geonames.countries))
 
+(deftest test-parse-country
+  (is (nil? (parse-country "invalid")))
+  (is (nil? (parse-country "invalid\tinvalid\tinvalid\tinvalid"))))
+
 (deftest test-parse-faroe-islands
   (let [country (parse-country "FO\tFRO\t234\tFO\tFaroe Islands\tTórshavn\t1399\t48228\tEU\t.fo\tDKK\tKrone\t298\tFO-###\t^(?:FO)*(\\d{3})$\tfo,da-FO\t2622320")]
     (are [attribute expected] (= (country attribute) expected)
