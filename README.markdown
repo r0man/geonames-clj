@@ -1,7 +1,14 @@
 # Clojure API for GeoNames.
 
-This is a Clojure API for some [Geonames](http://www.geonames.org)
-services. 
+This is a Clojure API for some [GeoNames](http://www.geonames.org)
+services. Currently there is only a country and region parser
+implemented.
+
+## Installation
+
+The JAR is available on [Clojars](http://clojars.org/geonames), or use
+[Leiningen](http://github.com/technomancy/leiningen) to build your own
+...
 
 ### Country Parser
 
@@ -45,4 +52,9 @@ user> (first (parse-regions))
 </code>
 </pre>
 
-More to come ...
+### License
+
+Copyright (C) 2010 Roman Scherer.
+
+Distributed under the Eclipse Public License, the same as Clojure
+uses. See the file COPYING for more information.
