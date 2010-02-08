@@ -5,10 +5,9 @@
 
 (defstruct region :name :country-id :region-id :geonames-id)
 
-(defn parse-region [line]
-  (if-let [match (re-find #"(..)\.([^\t]+)\t(.+)" line)]
-    (let [[_ country-id region-id name] match]
-      (struct region name country-id region-id (str country-id "." region-id)))))
+(defn parse-region [line] 
+  (if-let [[_ geonames-id country-id region-id name] (re-find #"((..)\.([^\t]+))\t(.+)" line)]    
+    (struct region name country-id region-id geonames-id)))
 
 (defn parse-regions
   ([] (parse-regions *url*))

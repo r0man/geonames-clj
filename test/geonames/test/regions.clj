@@ -2,6 +2,7 @@
   (:use clojure.test geonames.regions))
 
 (deftest test-parse-region
+  (is (nil? (parse-region "invalid")))
   (let [region (parse-region "AD.00\tAndorra (general)")]
     (are [keyword value] (= (region keyword) value)
          :name "Andorra (general)"
