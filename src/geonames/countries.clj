@@ -19,9 +19,6 @@
 (defn- parse-list [string]
   (if string (map trim (split string #","))))
 
-(defn- valid-country? [country]
-  (and country (:name country) (:iso-3166-alpha-2 country)))
-
 (defn parse-country [line]  
   (if-not (comment? line)
     (let [[iso-3166-alpha-2 iso-3166-alpha-3 iso-3166-numeric fips-code
