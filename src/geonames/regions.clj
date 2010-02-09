@@ -1,5 +1,6 @@
 (ns geonames.regions
-  (:use [clojure.contrib.duck-streams :only (read-lines)]))
+  (:use [clojure.contrib.duck-streams :only (read-lines)]
+        [clojure.contrib.str-utils2 :only (trim)]))
 
 (def *url* "http://download.geonames.org/export/dump/admin1Codes.txt")
 
@@ -7,7 +8,7 @@
 
 (defn parse-region [line] 
   (if-let [[_ geonames-id country-id region-id name] (re-find #"((..)\.([^\t]+))\t(.+)" line)]    
-    (struct region name country-id region-id geonames-id)))
+    (struct region (trim name) (trim country-id) (trim region-id) (trim geonames-id))))
 
 (defn parse-regions
   ([] (parse-regions *url*))
