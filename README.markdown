@@ -6,9 +6,7 @@ implemented.
 
 ## Installation
 
-The JAR is available on [Clojars](http://clojars.org/geonames), or use
-[Leiningen](http://github.com/technomancy/leiningen) to build your own
-...
+The JAR is available on [Clojars](http://clojars.org/geonames).
 
 ### Country Parser
 
@@ -42,7 +40,7 @@ regions found in the
 file on the GeoNames [download
 server](http://download.geonames.org/export/dump/).
 
-Example:
+### Examples
 <pre>
 <code>
 user> (use 'geonames.regions)
