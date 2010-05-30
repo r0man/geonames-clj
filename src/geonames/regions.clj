@@ -1,6 +1,6 @@
 (ns geonames.regions
   (:use [clojure.contrib.duck-streams :only (read-lines)]
-        [clojure.contrib.str-utils2 :only (trim)]))
+        [clojure.contrib.string :only (trim)]))
 
 (def *url* "http://download.geonames.org/export/dump/admin1Codes.txt")
 

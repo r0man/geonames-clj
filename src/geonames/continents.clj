@@ -1,5 +1,5 @@
 (ns geonames.continents
-  (:use [clojure.contrib.seq-utils :only (find-first)]))
+  (:use [clojure.contrib.seq :only (find-first)]))
 
 (defstruct continent :name :iso-3166-alpha-2 :geonames-id)
 
@@ -15,4 +15,3 @@
 
 (defn find-by-iso-3166-alpha-2 [code]
   (find-first #(= (:iso-3166-alpha-2 %) code) *continents*))
-
