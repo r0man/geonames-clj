@@ -33,7 +33,7 @@
     (is (= (find-nearby {:latitude 40.463667 :longitude -3.74922})
            (:geonames *response*)))))
 
-(deftest test-find-nearby-placename
+(deftest test-find-nearby-place-name
   (expect [geonames.geocoder/json-request
            (has-args ["http://ws.geonames.org/findNearbyPlaceNameJSON?lng=-3.74922&lat=40.463667"]
                      (times 1 (returns (:geonames *response*))))]
