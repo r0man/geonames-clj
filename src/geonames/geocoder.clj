@@ -30,5 +30,6 @@
 (defn formatted-address
   "Returns the formatted address of the result."
   [result]
-  (if result
-    (join ", " (remove blank? [(:name result) (:adminName1 result) (:countryName result)]))))
+  (let [address (join ", " (remove blank? [(:name result) (:adminName1 result) (:countryName result)]))]
+    (if-not (blank? address)
+      address)))

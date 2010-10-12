@@ -40,7 +40,9 @@
     (is (= (find-nearby-place-name {:latitude 40.463667 :longitude -3.74922})
            (:geonames *response*)))))
 
-(deftest test-formatted-address  
+(deftest test-formatted-address
+  (is (nil? (formatted-address nil)))
+  (is (nil? (formatted-address {})))
   (testing "with country"
     (is (= (formatted-address {:countryName "Spain"}) "Spain")))
   (testing "with admin and country"
