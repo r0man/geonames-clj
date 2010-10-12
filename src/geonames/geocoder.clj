@@ -26,3 +26,9 @@
 (defn find-nearby-place-name [location & options]  
   (let [options (apply hash-map options)]
     (json-request (endpoint-url "findNearbyPlaceNameJSON" (merge options {:lat (:latitude location) :lng (:longitude location)})))))
+
+(defn formatted-address
+  "Returns the formatted address of the result."
+  [result]
+  (if result
+    (join ", " (remove blank? [(:name result) (:adminName1 result) (:countryName result)]))))

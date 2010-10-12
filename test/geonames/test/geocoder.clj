@@ -39,3 +39,13 @@
                      (times 1 (returns (:geonames *response*))))]
     (is (= (find-nearby-place-name {:latitude 40.463667 :longitude -3.74922})
            (:geonames *response*)))))
+
+(deftest test-formatted-address  
+  (testing "with country"
+    (is (= (formatted-address {:countryName "Spain"}) "Spain")))
+  (testing "with admin and country"
+    (is (= (formatted-address {:countryName "Spain" :adminName1 "Basque Country"})
+           "Basque Country, Spain")))
+  (testing "with name, admin and country"
+    (is (= (formatted-address {:countryName "Spain" :name "Mundaka" :adminName1 "Basque Country"})
+           "Mundaka, Basque Country, Spain"))))
