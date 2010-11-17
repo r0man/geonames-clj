@@ -13,4 +13,3 @@
 (defn parse-regions
   ([] (parse-regions *url*))
   ([source] (map parse-region (read-lines source))))
-

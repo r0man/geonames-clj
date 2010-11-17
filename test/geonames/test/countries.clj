@@ -14,12 +14,12 @@
     (are [attribute expected] (= (get country attribute) expected)
          :area 1399
          :capital "Tórshavn"
-         :continent {:iso-3166-alpha-2 "eu"}
+         :continent {:iso-3166-1-alpha-2 "eu"}
          :currency-code "DKK"
          :currency-name "Krone"
          :fips-code "FO"
          :geonames-id 2622320
-         :iso-3166-alpha-2 "fo"
+         :iso-3166-1-alpha-2 "fo"
          :iso-3166-alpha-3 "fro"
          :iso-3166-numeric 234
          :languages ["fo" "da-fo"]
@@ -36,12 +36,12 @@
     (are [attribute expected] (= (get country attribute) expected)
          :area 357021
          :capital "Berlin"
-         :continent {:iso-3166-alpha-2 "eu"}
+         :continent {:iso-3166-1-alpha-2 "eu"}
          :currency-code "EUR"
          :currency-name "Euro"
          :fips-code "GM"
          :geonames-id 2921044
-         :iso-3166-alpha-2 "de"
+         :iso-3166-1-alpha-2 "de"
          :iso-3166-alpha-3 "deu"
          :iso-3166-numeric 276
          :languages ["de"]

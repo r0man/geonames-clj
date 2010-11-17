@@ -3,10 +3,10 @@
         [clojure.contrib.string :only (lower-case)]))
 
 (defrecord Continent
-  [name iso-3166-alpha-2 geonames-id])
+  [name iso-3166-1-alpha-2 geonames-id])
 
-(defn make-continent [name iso-3166-alpha-2 geonames-id]
-  (Continent. name iso-3166-alpha-2 geonames-id))
+(defn make-continent [name iso-3166-1-alpha-2 geonames-id]
+  (Continent. name iso-3166-1-alpha-2 geonames-id))
 
 (def *continents*
      (map #(apply make-continent %)
@@ -18,6 +18,6 @@
            ["Oceania" "oc" 6255151] 
            ["South America" "sa" 6255150]]))
 
-(defn find-by-iso-3166-alpha-2 [code]  
+(defn find-by-iso-3166-1-alpha-2 [code]  
   (if-let [code (and code (lower-case code))]
-    (find-first #(= (:iso-3166-alpha-2 %) code) *continents*)))
+    (find-first #(= (:iso-3166-1-alpha-2 %) code) *continents*)))
