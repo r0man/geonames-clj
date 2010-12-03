@@ -20,8 +20,8 @@
          :fips-code "FO"
          :geonames-id 2622320
          :iso-3166-1-alpha-2 "fo"
-         :iso-3166-alpha-3 "fro"
-         :iso-3166-numeric 234
+         :iso-3166-1-alpha-3 "fro"
+         :iso-3166-1-numeric 234
          :languages ["fo" "da-fo"]
          :name "Faroe Islands"
          :neighbours []
@@ -42,8 +42,8 @@
          :fips-code "GM"
          :geonames-id 2921044
          :iso-3166-1-alpha-2 "de"
-         :iso-3166-alpha-3 "deu"
-         :iso-3166-numeric 276
+         :iso-3166-1-alpha-3 "deu"
+         :iso-3166-1-numeric 276
          :languages ["de"]
          :name "Germany"
          :neighbours ["ch" "pl" "nl" "dk" "be" "cz" "lu" "fr" "at"]
