@@ -1,6 +1,6 @@
 (ns geonames.regions
-  (:use [clojure.contrib.duck-streams :only (read-lines)]
-        [clojure.contrib.string :only (trim)]))
+  (:use [clojure.java.io :only (reader)]
+        [clojure.string :only (trim)]))
 
 (def *url* "http://download.geonames.org/export/dump/admin1CodesASCII.txt")
 
@@ -12,4 +12,4 @@
 
 (defn parse-regions
   ([] (parse-regions *url*))
-  ([source] (map parse-region (read-lines source))))
+  ([source] (map parse-region (line-seq (reader source)))))

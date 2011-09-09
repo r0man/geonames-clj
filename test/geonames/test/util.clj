@@ -1,5 +1,6 @@
 (ns geonames.test.util
-  (:use clojure.test geonames.util))
+  (:use clojure.test
+        geonames.util))
 
 (deftest test-url-encode
   (are [string encoding expected]

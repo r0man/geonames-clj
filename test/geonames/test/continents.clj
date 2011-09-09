@@ -1,6 +1,7 @@
 (ns geonames.test.continents
-  (:use [clojure.contrib.string :only (lower-case)]
-        clojure.test geonames.continents)
+  (:use [clojure.string :only (lower-case)]
+        clojure.test
+        geonames.continents)
   (:import geonames.continents.Continent))
 
 (deftest test-find-by-iso-3166-1-alpha-2

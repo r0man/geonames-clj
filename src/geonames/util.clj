@@ -1,6 +1,6 @@
 (ns geonames.util
   (:import java.net.URLEncoder)
-  (:use [clojure.contrib.string :only (join)]))
+  (:use [clojure.string :only (join)]))
 
 (defmulti url-encode
   "Returns a url encoded string of the given object."

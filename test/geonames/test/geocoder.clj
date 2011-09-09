@@ -1,6 +1,5 @@
 (ns geonames.test.geocoder
-  (:use [clojure.contrib.def :only (defvar)]
-        [clojure.contrib.duck-streams :only (reader)]
+  (:use [clojure.java.io :only (reader)]
         clojure.contrib.mock
         clojure.test
         geonames.geocoder
@@ -8,7 +7,7 @@
 
 (refer-private 'geonames.geocoder)
 
-(defvar *response*
+(def example-response
   {:geonames [{:lng -3.7166667, :continentCode "EU", :countryName "Spain", :geonameId 3106970, :elevation 0, :adminName4 "",
                :fclName "city, village,...", :adminName3 "Madrid", :timezone {:dstOffset 2, :gmtOffset 1, :timeZoneId "Europe/Madrid"},
                :adminName2 "Province of Madrid", :name "Valdeconejos", :toponymName "Valdeconejos", :adminCode2 "M", :adminCode3 "28079",
@@ -29,16 +28,16 @@
 (deftest test-find-nearby
   (expect [geonames.geocoder/json-request
            (has-args ["http://ws.geonames.org/findNearbyJSON?lng=-3.74922&lat=40.463667"]
-                     (times 1 (returns (:geonames *response*))))]
+                     (times 1 (returns (:geonames example-response))))]
     (is (= (find-nearby {:latitude 40.463667 :longitude -3.74922})
-           (:geonames *response*)))))
+           (:geonames example-response)))))
 
 (deftest test-find-nearby-place-name
   (expect [geonames.geocoder/json-request
            (has-args ["http://ws.geonames.org/findNearbyPlaceNameJSON?lng=-3.74922&lat=40.463667"]
-                     (times 1 (returns (:geonames *response*))))]
+                     (times 1 (returns (:geonames example-response))))]
     (is (= (find-nearby-place-name {:latitude 40.463667 :longitude -3.74922})
-           (:geonames *response*)))))
+           (:geonames example-response)))))
 
 (deftest test-formatted-address
   (is (nil? (formatted-address nil)))

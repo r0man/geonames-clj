@@ -1,6 +1,6 @@
 (ns geonames.countries
-  (:use [clojure.contrib.duck-streams :only (read-lines)]
-        [clojure.contrib.string :only (lower-case split trim)]))
+  (:use [clojure.java.io :only (reader)]
+        [clojure.string :only (lower-case split trim)]))
 
 (def *url* "http://download.geonames.org/export/dump/countryInfo.txt")
 
@@ -17,7 +17,7 @@
        (catch NumberFormatException exception nil)))
 
 (defn- parse-list [string]
-  (if string (map trim (split #"," string))))
+  (if string (map trim (split string #","))))
 
 (defn parse-country [line]
   (if-not (comment? line)
@@ -25,7 +25,7 @@
            name capital area population continent-code top-level-domain
            currency-code currency-name phone-prefix post-code-format
            post-code-regexp languages geonames-id neighbours]
-          (split #"\t" line)]
+          (split line #"\t")]
       (and name iso-3166-1-alpha-2 iso-3166-1-alpha-3 iso-3166-1-numeric continent-code
            (Country.
             (parse-integer area)
@@ -49,4 +49,4 @@
 
 (defn parse-countries
   ([] (parse-countries *url*))
-  ([source] (map parse-country (filter (complement comment?) (read-lines source)))))
+  ([source] (map parse-country (filter (complement comment?) (line-seq (reader source))))))

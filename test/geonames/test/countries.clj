@@ -1,5 +1,6 @@
 (ns geonames.test.countries
-  (:use clojure.test geonames.countries))
+  (:use clojure.test
+        geonames.countries))
 
 (deftest test-parse-country
   (are [line] (is nil? (parse-country line))
