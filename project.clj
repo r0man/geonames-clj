@@ -1,4 +1,4 @@
-(defproject geonames "0.5.1-SNAPSHOT"
+(defproject geonames "0.5.2"
   :description "Clojure API for GeoNames."
   :url "http://github.com/r0man/geonames-clj"
   :dependencies [[org.clojure/clojure "1.2.1"]
