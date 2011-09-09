@@ -55,4 +55,4 @@
 
 (deftest test-parse-countries
   (let [countries (parse-countries)]
-    (is (= (count countries) 248))))
+    (is (> (count countries) 248))))

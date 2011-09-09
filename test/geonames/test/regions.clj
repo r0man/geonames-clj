@@ -24,4 +24,4 @@
 
 (deftest test-parse-regions
   (let [regions (parse-regions)]
-    (is (> (count regions) 4000))))
+    (is (> (count regions) 3800))))
