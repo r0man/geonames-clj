@@ -1,8 +1,7 @@
 (ns geonames.geocoder
   (:require [clj-http.client :as client])
   (:use [clojure.data.json :only (read-json)]
-        [clojure.string :only (blank? lower-case join)]
-        [geonames.util :only (url-encode)]))
+        [clojure.string :only (blank? lower-case join)]))
 
 (def ^:dynamic *base-url* "http://ws.geonames.org")
 (def ^:dynamic *username* "demo")
