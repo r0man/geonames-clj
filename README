@@ -1,8 +1,6 @@
 # GEONAMES-CLJ
 
-A Clojure library for some of the GeoNames web services. If you are
-only interested in geocoding you can take a look at the geocoder-clj
-library at https://github.com/r0man/geocoder-clj.
+A Clojure library for some of the Geo Names web services.
 
 ## Installation
 
