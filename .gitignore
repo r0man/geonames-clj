@@ -1,7 +1,5 @@
+/.lein-failures
 /classes
 /lib
+/multi-lib
 /pom.xml
-/geonames.jar
-/geonames-0.5-SNAPSHOT.jar
-/geonames-0.5.1-SNAPSHOT.jar
-/.lein-failures

@@ -2,7 +2,7 @@
   (:use [clojure.java.io :only (reader)]
         [clojure.string :only (lower-case split trim)]))
 
-(def *url* "http://download.geonames.org/export/dump/countryInfo.txt")
+(def ^:dynamic *url* "http://download.geonames.org/export/dump/countryInfo.txt")
 
 (defrecord Country
   [area capital continent currency-code currency-name fips-code geonames-id
@@ -48,5 +48,8 @@
             (trim top-level-domain))))))
 
 (defn parse-countries
-  ([] (parse-countries *url*))
-  ([source] (map parse-country (filter (complement comment?) (line-seq (reader source))))))
+  [& [source]]
+  (->> (reader (or source *url*))
+       (line-seq)
+       (filter (complement comment?))
+       (map parse-country)))
