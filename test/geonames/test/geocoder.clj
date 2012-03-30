@@ -28,10 +28,10 @@
     (let [place (first places)]
       (is (= -3.7166667 (:lng place)))
       (is (= "Spain" (:countryName place)))
-      (is (= 3106970 (:geonameId place)))
+      (is (= 3108118 (:geonameId place)))
       (is (= "city, village,..." (:fclName place)))
-      (is (= "Valdeconejos" (:name place)))
-      (is (= "Valdeconejos" (:toponymName place)))
+      (is (= "Tetuán de las Victorias" (:name place)))
+      (is (= "Tetuán de las Victorias" (:toponymName place)))
       (is (= "29" (:adminCode1 place)))
       (is (= "PPLX" (:fcode place)))
       (is (= 40.4666667 (:lat place)))
