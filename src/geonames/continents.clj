@@ -1,21 +1,23 @@
 (ns geonames.continents
-  (:use [clojure.string :only (lower-case)]))
-
-(defrecord Continent [name iso-3166-1-alpha-2 geonames-id])
-
-(defn make-continent [name iso-3166-1-alpha-2 geonames-id]
-  (Continent. name iso-3166-1-alpha-2 geonames-id))
+  (:use [clojure.string :only [lower-case]]))
 
 (def ^:dynamic *continents*
-  (map #(apply make-continent %)
-       [["Africa" "af" 6255146]
-        ["Antarctica" "an" 6255152]
-        ["Asia" "as" 6255147]
-        ["Europe" "eu" 6255148]
-        ["North America" "na" 6255149]
-        ["Oceania" "oc" 6255151]
-        ["South America" "sa" 6255150]]))
+  #{{:id 6255146 :code "AF" :name "Africa"}
+    {:id 6255152 :code "AN" :name "Antarctica"}
+    {:id 6255147 :code "AS" :name "Asia"}
+    {:id 6255148 :code "EU" :name "Europe"}
+    {:id 6255149 :code "NA" :name "North America"}
+    {:id 6255151 :code "OC" :name "Oceania"}
+    {:id 6255150 :code "SA" :name "South America"}})
 
-(defn find-by-iso-3166-1-alpha-2 [code]
-  (if-let [code (and code (lower-case code))]
-    (first (filter #(= (:iso-3166-1-alpha-2 %) code) *continents*))))
+(defn continent-by-code
+  "Returns the Geonames continent by `code`."
+  [code] (first (filter #(= (lower-case code) (lower-case (:code %1))) *continents*)))
+
+(defn continent-by-name
+  "Returns the Geonames continent by `name`."
+  [name] (first (filter #(= (lower-case name) (lower-case (:name %1))) *continents*)))
+
+(defn continent-by-id
+  "Returns the Geonames continent by `id`."
+  [id] (first (filter #(= id (:id %1)) *continents*)))
