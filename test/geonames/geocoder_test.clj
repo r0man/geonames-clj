@@ -1,4 +1,4 @@
-(ns geonames.test.geocoder
+(ns geonames.geocoder-test
   (:use clojure.test
         geonames.geocoder))
 

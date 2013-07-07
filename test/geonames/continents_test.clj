@@ -1,4 +1,4 @@
-(ns geonames.test.continents
+(ns geonames.continents-test
   (:use clojure.test
         geonames.continents))
 
