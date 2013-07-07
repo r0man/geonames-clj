@@ -8,6 +8,8 @@ Via Clojars: http://clojars.org/geonames
 
 ## Usage
 
+### Countries
+
     (use 'geonames.countries)
 
     (first (parse-countries))
@@ -30,13 +32,7 @@ Via Clojars: http://clojars.org/geonames
     ;=>  :post-code-regexp "^(?:AD)*(\\d{3})$",
     ;=>  :top-level-domain ".ad"}
 
-    (use 'geonames.regions)
-
-    (first (parse-regions))
-    ;=> {:name "Andorra (general)",
-    ;=>  :country-id "AD",
-    ;=>  :region-id "00",
-    ;=>  :geonames-id "AD.00"}
+### Geocoder
 
     (use 'geonames.geocoder)
 
