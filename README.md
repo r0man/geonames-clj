@@ -12,7 +12,7 @@ Via Clojars: http://clojars.org/geonames
 
     (use 'geonames.countries)
 
-    (first (parse-countries))
+    (first (countries))
     ;=> {:area 468,
     ;=>  :capital "Andorra la Vella",
     ;=>  :continent {:iso-3166-1-alpha-2 "eu"},
