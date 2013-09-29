@@ -19,7 +19,7 @@
       (is (= "Madrid" (:adminName1 place)))
       (is (= "ES" (:countryCode place)))
       (is (= "S" (:fcl place)))
-      (is (= "0.48238" (:distance place)))
+      (is (= "0.48219" (:distance place)))
       (is (= "golf course" (:fcodeName place))))))
 
 (deftest test-find-nearby-place-name
@@ -39,7 +39,7 @@
       (is (= "Madrid" (:adminName1 place)))
       (is (= "ES" (:countryCode place)))
       (is (= "P" (:fcl place)))
-      (is (= "2.77391" (:distance place)))
+      (is (= "2.78092" (:distance place)))
       (is (= "section of populated place" (:fcodeName place))))))
 
 (deftest test-formatted-address
