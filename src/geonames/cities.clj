@@ -19,7 +19,7 @@
         (update-in [:population] parse-integer)
         (replace-blank-values))))
 
-(defn cities15000
+(defn cities-15000
   "Returns the Geonames cities with population over 15,000."
   [& [source]]
   (->> (reader (let [zip-stream (ZipInputStream. (input-stream (or source *zip-url*)))
