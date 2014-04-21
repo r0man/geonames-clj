@@ -4,13 +4,13 @@
             [geonames.util :refer :all])
   (:import (java.util.zip ZipInputStream)))
 
-(def ^:private ^:dynamic *zip-url*
+(def ^:dynamic *zip-url*
   "http://download.geonames.org/export/dump/cities15000.zip")
 
-(def ^:private ^:dynamic *header*
+(def ^:dynamic *header*
   [:geonameid :name :asciiname :alternatenames :latitude :longitude :feature_class :feature_code :country_code :cc2 :admin1_code :admin2_code :admin3_code :admin4_code :population :elevation :dem :timezone :modification_date])
 
-(defn ^:private parse-line [line]
+(defn parse-line [line]
   (if-not (comment? line)
     (-> (zipmap *header* (split line #"\t"))
         (update-in [:geonameid] parse-integer)
