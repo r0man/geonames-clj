@@ -8,12 +8,30 @@
   "http://download.geonames.org/export/dump/cities15000.zip")
 
 (def ^:dynamic *header*
-  [:geonameid :name :asciiname :alternatenames :latitude :longitude :feature_class :feature_code :country_code :cc2 :admin1_code :admin2_code :admin3_code :admin4_code :population :elevation :dem :timezone :modification_date])
+  [:geoname-id 
+   :name 
+   :ascii-name 
+   :alternate-names 
+   :latitude 
+   :longitude 
+   :feature-class 
+   :feature-code 
+   :country-code 
+   :cc2 
+   :admin1-code 
+   :admin2-code 
+   :admin3-code 
+   :admin4-code 
+   :population 
+   :elevation 
+   :dem 
+   :timezone 
+   :modification-date])
 
 (defn parse-line [line]
   (if-not (comment? line)
     (-> (zipmap *header* (split line #"\t"))
-        (update-in [:geonameid] parse-integer)
+        (update-in [:geoname-id] parse-integer)
         ;; (update-in [:latitude] parse-integer)
         ;; (update-in [:longitude] parse-integer)
         (update-in [:population] parse-integer)
