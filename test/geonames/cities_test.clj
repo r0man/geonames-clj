@@ -1,4 +1,4 @@
-(ns geonames.countries-test
+(ns geonames.cities-test
   (:require [clojure.string :refer [blank?]])
   (:use clojure.test
         geonames.cities))
