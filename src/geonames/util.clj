@@ -9,6 +9,10 @@
   (try (Integer/parseInt string)
        (catch NumberFormatException exception nil)))
 
+(defn parse-float [string]
+  (try (Float/parseFloat string)
+       (catch NumberFormatException exception nil)))
+
 (defn parse-list [string]
   (if string (map trim (split string #","))))
 

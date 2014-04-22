@@ -32,8 +32,8 @@
   (if-not (comment? line)
     (-> (zipmap *header* (split line #"\t"))
         (update-in [:geoname-id] parse-integer)
-        ;; (update-in [:latitude] parse-integer)
-        ;; (update-in [:longitude] parse-integer)
+        (update-in [:latitude] parse-float)
+        (update-in [:longitude] parse-float)
         (update-in [:population] parse-integer)
         (replace-blank-values))))
 
