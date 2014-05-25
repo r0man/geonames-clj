@@ -9,7 +9,7 @@ A Clojure library for some of the Geo Names web services.
 
 Via Clojars: http://clojars.org/geonames
 
-[![Current Version](https://clojars.org/geonames-clj/latest-version.svg)](https://clojars.org/geonames-clj)
+[![Current Version](https://clojars.org/geonames/latest-version.svg)](https://clojars.org/geonames)
 
 ## Usage
 
