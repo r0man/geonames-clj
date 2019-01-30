@@ -1,5 +1,5 @@
 (ns geonames.continents
-  (:use [clojure.string :only [lower-case]]))
+  (:require [clojure.string :as str]))
 
 (def ^:dynamic *continents*
   #{{:id 6255146 :code "AF" :name "Africa"}
@@ -12,11 +12,17 @@
 
 (defn continent-by-code
   "Returns the Geonames continent by `code`."
-  [code] (first (filter #(= (lower-case code) (lower-case (:code %1))) *continents*)))
+  [code]
+  (first (filter #(= (str/lower-case code)
+                     (str/lower-case (:code %1)))
+                 *continents*)))
 
 (defn continent-by-name
   "Returns the Geonames continent by `name`."
-  [name] (first (filter #(= (lower-case name) (lower-case (:name %1))) *continents*)))
+  [name]
+  (first (filter #(= (str/lower-case name)
+                     (str/lower-case (:name %1)))
+                 *continents*)))
 
 (defn continent-by-id
   "Returns the Geonames continent by `id`."

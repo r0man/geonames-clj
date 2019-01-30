@@ -1,10 +1,9 @@
 (ns geonames.cities-test
-  (:require [clojure.string :refer [blank?]])
-  (:use clojure.test
-        geonames.cities))
+  (:require [clojure.test :refer :all]
+            [geonames.cities :as cities]))
 
 (deftest test-cities
-  (let [cities (cities-15000)]
+  (let [cities (cities/cities-15000)]
     (is (not (empty? cities)))
     (let [san-francisco (first (filter #(= 5391959 (:geoname-id %)) cities))]
       (is (= 5391959 (:geoname-id san-francisco)))

@@ -1,10 +1,9 @@
 (ns geonames.countries-test
-  (:require [clojure.string :refer [blank?]])
-  (:use clojure.test
-        geonames.countries))
+  (:require [clojure.test :refer :all]
+            [geonames.countries :as countries]))
 
 (deftest test-countries
-  (let [countries (countries)]
+  (let [countries (countries/countries)]
     (is (= 252 (count countries)))
     (let [country (first countries)]
       (is (= 3041565 (:id country)))
