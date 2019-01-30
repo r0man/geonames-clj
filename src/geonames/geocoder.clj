@@ -1,32 +1,71 @@
 (ns geonames.geocoder
   (:require [clj-http.client :as client])
   (:use [clojure.data.json :only (read-str)]
-        [clojure.string :only (blank? lower-case join)]))
+        [clojure.string :as str]))
 
-(def ^:dynamic *base-url* "http://ws.geonames.org")
-(def ^:dynamic *key* "demo")
+(defn city
+  [address]
+  (:place-name address))
 
-(defn request [endpoint & [query-params]]
-  (let [read-json #(read-str %1 :key-fn keyword)]
-    (->> (client/request
-          {:url (str *base-url* "/" endpoint)
-           :method :get
-           :query-params (assoc query-params :key *key*)})
-         :body read-json :geonames)))
+(defn country
+  [address]
+  {:iso-3166-1-alpha-2 (str/lower-case (:country-code address))})
 
-(defn find-nearby [location & {:as options}]
-  (request "findNearbyJSON" (assoc options :lat (:latitude location) :lng (:longitude location))))
+(defn location [address]
+  (select-keys address [:lat :lng]))
 
-(defn find-nearby-place-name [location & {:as options}]
-  (request "findNearbyPlaceNameJSON" (assoc options :lat (:latitude location) :lng (:longitude location))))
+(defn street-name [address]
+  (:address-line (:address address)))
 
-(defn formatted-address
-  "Returns the formatted address of the result."
-  [result]
-  (let [address (join ", " (remove blank? [(:name result) (:adminName1 result) (:countryName result)]))]
-    (if-not (blank? address)
-      address)))
+(defn postal-code [address]
+  (:postal-code address))
 
-(defmacro with-key
-  "Evaluate `body` with *key* bound to `key`."
-  [key & body] `(binding [*key* ~key] ~@body))
+(defn region [address]
+  (:admin-name1 address))
+
+(defn- request
+  "Make a geocode request map."
+  [geocoder & [opts]]
+  {:request-method :get
+   :query-params
+   (assoc opts :username (:api-key geocoder))})
+
+(defn fetch-json
+  "Send the request, parse the hyphenated JSON body of the response."
+  [request]
+  (try (->> (merge
+             {:as :auto
+              :accept "application/json"
+              :throw-exceptions true
+              :coerce :always}
+             request)
+            (client/request)
+            :body
+            hyphenate-keys)
+       (catch Exception e
+         (throw (ex-info (str "Geocode request failed: " (.getMessage e))
+                         (hyphenate-keys (ex-data e)))))))
+
+(defn- fetch
+  "Fetch and decode the Geonames geocode response."
+  [request]
+  (-> (fetch-json request)
+      :postal-codes))
+
+(defn geocode-address [geocoder address & [opts]]
+  (-> (request geocoder opts)
+      (assoc :url "http://api.geonames.org/postalCodeSearchJSON")
+      (assoc-in [:query-params :placename] address)
+      (fetch)))
+
+(defn geocode-location [geocoder location & [opts]]
+  (-> (request geocoder opts)
+      (assoc :url (str "http://api.geonames.org/findNearbyPostalCodesJSON"))
+      (assoc-in [:query-params :lat] (:lat location))
+      (assoc-in [:query-params :lng] (:lng location))
+      (fetch)))
+
+(defn geocoder
+  "Returns a new Geonames geocoder."
+  [& [{:keys [api-key]}]]
+  {:api-key api-key})
