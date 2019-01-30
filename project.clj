@@ -1,4 +1,4 @@
-(defproject geonames "0.7.2-SNAPSHOT"
+(defproject geonames "0.7.2"
   :description "Clojure API for GeoNames."
   :url "https://github.com/r0man/geonames-clj"
   :deploy-repositories [["releases" :clojars]]
