@@ -1,6 +1,7 @@
-(defproject geonames "0.7.1"
+(defproject geonames "0.7.2-SNAPSHOT"
   :description "Clojure API for GeoNames."
   :url "https://github.com/r0man/geonames-clj"
+  :deploy-repositories [["releases" :clojars]]
   :min-lein-version "2.0.0"
   :author "r0man"
   :license {:name "Eclipse Public License"
