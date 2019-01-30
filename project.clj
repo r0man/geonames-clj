@@ -9,6 +9,6 @@
   :dependencies [[clj-http "3.9.1"]
                  [org.clojure/clojure "1.10.0"]
                  [org.clojure/data.json "0.2.6"]]
-  :plugins [[jonase/eastwood "0.3.4"]]
+  :plugins [[jonase/eastwood "0.3.5"]]
   :aliases {"ci" ["do" ["test"] ["lint"]]
             "lint" ["do"  ["eastwood"]]})

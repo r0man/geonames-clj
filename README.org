@@ -1,0 +1,54 @@
+* geonames-clj
+  :PROPERTIES:
+  :CUSTOM_ID: geonames-clj
+  :END:
+
+  [[https://clojars.org/geonames][https://img.shields.io/clojars/v/geonames.svg]]
+  [[https://travis-ci.org/r0man/geonames-clj][https://travis-ci.org/r0man/geonames-clj.svg]]
+  [[https://versions.deps.co/r0man/geonames-clj][https://versions.deps.co/r0man/geonames-clj/status.svg]]
+  [[https://versions.deps.co/r0man/geonames-clj][https://versions.deps.co/r0man/geonames-clj/downloads.svg]]
+
+  A Clojure library for some of the Geo Names web services.
+
+** Usage
+   :PROPERTIES:
+   :CUSTOM_ID: usage
+   :END:
+
+*** Countries
+    :PROPERTIES:
+    :CUSTOM_ID: countries
+    :END:
+
+    #+BEGIN_EXAMPLE
+        (require '[geonames.countries :as countries])
+
+        (first (countries/countries))
+        ;=> {:area 468,
+        ;=>  :capital "Andorra la Vella",
+        ;=>  :continent {:iso-3166-1-alpha-2 "eu"},
+        ;=>  :currency-code "EUR",
+        ;=>  :currency-name "Euro",
+        ;=>  :fips-code "AN",
+        ;=>  :geonames-id 3041565,
+        ;=>  :iso-3166-1-alpha-2 "ad",
+        ;=>  :iso-3166-1-alpha-3 "and",
+        ;=>  :iso-3166-1-numeric 20,
+        ;=>  :languages ("ca"),
+        ;=>  :name "Andorra",
+        ;=>  :neighbours ("es" "fr"),
+        ;=>  :phone-prefix "376",
+        ;=>  :population 84000,
+        ;=>  :post-code-format "AD###",
+        ;=>  :post-code-regexp "^(?:AD)*(\\d{3})$",
+        ;=>  :top-level-domain ".ad"}
+    #+END_EXAMPLE
+
+** License
+   :PROPERTIES:
+   :CUSTOM_ID: license
+   :END:
+
+   Copyright (C) 2013-2019 [[https://github.com/r0man][r0man]]
+
+   Distributed under the Eclipse Public License, the same as Clojure.
