@@ -16,9 +16,9 @@ Via Clojars: http://clojars.org/geonames
 ### Countries
 
 ``` clj
-(use 'geonames.countries)
+(require '[geonames.countries :as countries])
 
-(first (countries))
+(first (countries/countries))
 ;=> {:area 468,
 ;=>  :capital "Andorra la Vella",
 ;=>  :continent {:iso-3166-1-alpha-2 "eu"},
@@ -39,31 +39,8 @@ Via Clojars: http://clojars.org/geonames
 ;=>  :top-level-domain ".ad"}
 ```
 
-### Geocoder
-
-``` clj
-(use 'geonames.geocoder)
-
-(find-nearby-place-name {:latitude 52.54254 :longitude 13.423033})
-;=> [{:lng 13.423426151275635,
-;=>   :countryName "Germany",
-;=>   :geonameId 3213806,
-;=>   :fclName "city, village,...",
-;=>   :name "Prenzlauer Berg",
-;=>   :toponymName "Prenzlauer Berg",
-;=>   :adminCode1 "16",
-;=>   :fcode "PPLX",
-;=>   :lat 52.55128007275792,
-;=>   :population 0,
-;=>   :adminName1 "Berlin",
-;=>   :countryCode "DE",
-;=>   :fcl "P",
-;=>   :distance "0.97217",
-;=>   :fcodeName "section of populated place"}]
-```
-
 ## License
 
-Copyright (C) 2013-2014 r0man
+Copyright (C) 2013-2019 r0man
 
 Distributed under the Eclipse Public License, the same as Clojure.
